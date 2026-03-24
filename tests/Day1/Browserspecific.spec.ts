@@ -9,7 +9,7 @@ test("chome channel run", async ({page})=>{
     //Playwright already launches the browser for you based on config.
     //You must configure browser/channel in playwright.config.ts
    
-    chromium.launch; 
-   channel:'opera'
+   // chromium.launch; 
+   //channel:'opera'
    await page.goto("https://saucelabs.com/");
 })
