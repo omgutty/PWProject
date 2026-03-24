@@ -9,6 +9,11 @@ test("login",async ({page})=>{
     await page.waitForURL('https://www.saucedemo.com/inventory.html');
     await page.context().storageState({path: 'auth/saucedemologin.json'});
 
-    
+})
 
+test.use({storageState:'auth/saucedemologin.json'})
+test("validate invertory title ",async ({page})=>{
+    await page.goto("https://www.saucedemo.com/inventory.html");
+    // page.locator(".title")
+    await expect(page.locator('.title')).toHaveText("Products");
 })
