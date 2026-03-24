@@ -13,9 +13,9 @@ test("login",async ({page})=>{
 
 })
 
-// test.use({storageState:'auth/saucedemologin.json'})
-// test("validate invertory title ",async ({page})=>{
-//     await page.goto("https://www.saucedemo.com/inventory.html");
-//     // page.locator(".title")
-//     await expect(page.locator('.title')).toHaveText("Products");
-// })
+test.use({storageState:'auth/saucedemologin.json'})
+test("validate invertory title ",async ({page})=>{
+    await page.goto("https://www.saucedemo.com/inventory.html");
+    // page.locator(".title")
+    await expect(page.locator('.title')).toHaveText("Products");
+})
