@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
-test('UK first test', async ({ page})=> {
-    await page.goto("https://icarus.cloudamber.com/");
+test('google first test', async ({ page})=> {
+    await page.goto("https://www.google.com/");
 
 })
 

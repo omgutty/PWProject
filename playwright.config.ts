@@ -35,7 +35,7 @@ export default defineConfig({
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     //trace: 'on-first-retry',
     trace: 'on',
-    headless: true,
+    //headless: true,
   },
 
   /* Configure projects for major browsers */
@@ -43,20 +43,61 @@ export default defineConfig({
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
-      
+     
     },
-/**
- * {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
-    },
+    
 
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
-    },
+  // {
+  //     name: 'firefox',
+  //     use: { ...devices['Desktop Firefox'] },
+  //   },
 
-*/
+  //   {
+  //     name: 'webkit',
+  //     use: { ...devices['Desktop Safari'] },
+  //   },
+
+
+  //added with channels below locally these must be avaialable to run 
+// projects: [
+//   {
+//     name: 'edge',
+//     use: {
+//       browserName: 'chromium',
+//       channel: 'msedge',              // ✅ Runs in Microsoft Edge
+//       ...devices['Desktop Edge'],     // optional but recommended
+//       headless: false,                // ensure headed mode
+//     },
+//   },
+
+//   {
+//     name: 'chromium',
+//     use: {
+//       browserName: 'chromium',
+//       ...devices['Desktop Chrome'],
+//       headless: false,
+//     },
+//   },
+
+//   {
+//     name: 'firefox',
+//     use: {
+//       browserName: 'firefox',
+//       ...devices['Desktop Firefox'],
+//       headless: false,
+//     },
+//   },
+
+//   {
+//     name: 'webkit',
+//     use: {
+//       browserName: 'webkit',
+//       ...devices['Desktop Safari'],
+//       headless: false,
+//     },
+//   },
+
+
     
 
     /* Test against mobile viewports. */
