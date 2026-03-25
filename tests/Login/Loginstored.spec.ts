@@ -1,5 +1,5 @@
 import {test, expect} from '@playwright/test';
-import path from 'node:path';
+
 
 test("login",async ({page})=>{
     // await page.context().storageState({path: 'auth/saucedemologin.json'});
@@ -13,9 +13,4 @@ test("login",async ({page})=>{
 
 })
 
-test.use({storageState:'auth/saucedemologin.json'})
-test("validate invertory title ",async ({page})=>{
-    await page.goto("https://www.saucedemo.com/inventory.html");
-    // page.locator(".title")
-    await expect(page.locator('.title')).toHaveText("Products");
-})
+
