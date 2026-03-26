@@ -9,7 +9,6 @@ test("login",async ({page})=>{
     await page.locator('#login-button').click();
     await page.waitForURL('https://www.saucedemo.com/inventory.html');
     await page.context().storageState({path: 'auth/saucedemologin.json'});
-    
 
 })
 

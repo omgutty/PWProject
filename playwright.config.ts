@@ -13,6 +13,7 @@ import { defineConfig, devices } from '@playwright/test';
  */
 export default defineConfig({
   testDir: './tests',
+  globalTimeout: 60 * 60 * 1000,
  // testDir: './playwright/tests',
   //testMatch: '**/*.ts', 
     // testMatch: /.*\.ts/,
@@ -37,6 +38,7 @@ export default defineConfig({
     trace: 'on',
     headless: true,
     storageState:'auth/saucedemologin.json',
+    
   },
 
   /* Configure projects for major browsers */
