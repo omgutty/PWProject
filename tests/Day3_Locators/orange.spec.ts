@@ -22,9 +22,15 @@ test("orangeHRM login",async ({page})=>{
     //validate the placeholder string , with to have attribute value  
     await expect(usernamefield).toHaveAttribute('placeholder', 'Username');
     
-    //enter the username 
-    await usernamefield.fill('Admin');
-    //validate after entering, 
+    //capturing the username from page 
+    const usernamedetails2=await page.getByText('Username : Admin',{exact:true}).innerText(); //capture the Username:Admin
+    const usernameadmin= usernamedetails2.split(':')[1].trim(); //trim to Admin
+
+    
+    //enter the username  which is captured abve Admin
+    await usernamefield.fill(usernameadmin);
+   
+    //validate after entering the username 
     await expect(usernamefield).toHaveValue('Admin');
 
     //identifying the Password text using getby text and validate is it visible  
@@ -38,8 +44,13 @@ test("orangeHRM login",async ({page})=>{
     //validate the placeholder string , with to have attribute value  
     await expect(passwordfield).toHaveAttribute('placeholder', 'Password');
 
+
+    //capturing the password from page 
+     const passworddetails =await page.getByText('Password : admin123',{exact:true}).innerText();//capturing the password from web
+      const password= passworddetails.split(':')[1].trim(); //trim to Admin123
+
     //enter the Password 
-    await passwordfield.fill('admin123');
+    await passwordfield.fill(password);
     //validate after entering the password, 
     await expect(passwordfield).toHaveValue('admin123');
 
@@ -47,5 +58,5 @@ test("orangeHRM login",async ({page})=>{
     await page.getByRole('button',{name:'Login'}).click();
 
     //after click login, dashboard page url should be present
-    expect (page.waitForURL("https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index"));
+    expect (await page.waitForURL("https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index"));
 })
