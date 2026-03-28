@@ -1,6 +1,6 @@
 import {test,expect, Locator } from '@playwright/test';;
 
-test.only("Using the Grid parent",async ({page})=>{
+test("Using the Grid parent",async ({page})=>{
 
     await page.goto("http://localhost:4200/pages/forms/layouts");
 
@@ -14,7 +14,7 @@ test.only("Using the Grid parent",async ({page})=>{
 
 });
 
-test.only("Basic form parent",async ({page})=>{
+test("Basic form parent",async ({page})=>{
 
     await page.goto("http://localhost:4200/pages/forms/layouts");
 
@@ -28,10 +28,10 @@ test.only("Basic form parent",async ({page})=>{
 
 });
 
-test.only("inlineform parent",async ({page})=>{
+test("inlineform parent",async ({page})=>{
 
     await page.goto("http://localhost:4200/pages/forms/layouts");
 
     await page.locator('nb-card',{hasText:'inline form'}).getByRole('textbox',{name:'Jane Doe'}).fill("inlineform parent")
-    await page.locator('nb-card',{hasText:'Inline form'}).getByLabel('button').click();
+    await page.locator('nb-card',{hasText:'Inline form'}).getByRole('button').click();
 })
