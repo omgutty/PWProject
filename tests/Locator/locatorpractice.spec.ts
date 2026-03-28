@@ -27,6 +27,16 @@ test("locator test",async ({page})=>{
 
     console.log(password);
 
+})
+
+test("username locator",async ({page})=>{
+    
+    await page.goto("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
+   
+    //identifying the username field and passing the username
+    await page.getByRole('textbox',{name:'username'}).fill("A");
+    await page.getByPlaceholder('Username').fill("d");
+    await page.locator('[name="username"]').fill("min");
 
 
 })
