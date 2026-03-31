@@ -39,7 +39,7 @@ export default defineConfig({
     //trace: 'on-first-retry',
     trace: 'on',
     headless: false,
-    storageState:'auth/saucedemologin.json',
+    
     
   },
 
@@ -52,6 +52,8 @@ export default defineConfig({
       headless: false,
       trace: 'on',
       screenshot: 'on',
+      //storageState:'auth/saucedemologin.json',
+      //storageState:'loginauth/praticetestautomationlogin.json',
     },
     },
     
