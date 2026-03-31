@@ -56,6 +56,19 @@ test("Bais form",async ({page})=>{
   
 // })
 
+test("child text",async ({page})=>{
+    await page.goto("http://localhost:4200/pages/forms/layouts");
+
+    
+    await page.locator('nb-card',{hasText:'Using the Grid'}).getByRole('textbox',{name:'Email'}).fill('using the grid');
+//locator chaning 
+    await page.locator('nb-card',{has:page.locator('#inputEmail1')}).getByRole('textbox',{name:"Email"}).type("_omgutty");
+
+    await page.locator('nb-card',{hasText:'Basic form'}).getByRole('textbox',{name:'Email'}).fill('basic form');
+
+    
+})
+
 
 
 
