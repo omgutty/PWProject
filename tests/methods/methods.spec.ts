@@ -19,7 +19,7 @@ import { text } from 'node:stream/consumers';
 
 
 //verify the registration form 
-test('textcontent', async ({page})=>{
+test('methos', async ({page})=>{
 
     //textcontent()- capture the text single value 
     await  page.goto("https://vinothqaacademy.com/demo-site/");
