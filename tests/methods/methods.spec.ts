@@ -1,4 +1,22 @@
 import {test,expect, Locator} from '@playwright/test';
+import { text } from 'node:stream/consumers';
+
+
+//textcontent()- retuns text of a single matched element as string 
+//alltextcontent()- returnns string [] value of all matching nodes
+//inputvalu()- to get the data string -textbox value
+//innertext()- to get the visible UI text
+
+
+//expect() methods
+//toequal()- check complete array/object value 
+//tocontain()- checks one item exist  in array/string
+//tocontainequal()- check an objec or arrray elemet by  value equality 
+//tohavevalue(); with locator - expect(locator).tohave('');
+
+//keyboard intractions
+//notes wirtten prss,prsssequalentially, fill, type, clear, focus, blur, keyboard.type()
+
 
 //verify the registration form 
 test('textcontent', async ({page})=>{
@@ -31,6 +49,13 @@ test('textcontent', async ({page})=>{
    const addressentry=await addressfield.inputValue();
    //validate the entered address with assertion 
    expect(addressentry).toEqual('address 1');
+
+   //filling the form one by one in the same field.
+   //cleared the filled data 
+   await addressfield.clear();
+
+   await addressfield.pressSequentially('test@gmail.com',{delay:1000});
+   await addressfield.type('hahaha'); // add after the email
 
 
 })
