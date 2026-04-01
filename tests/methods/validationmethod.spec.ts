@@ -13,14 +13,18 @@ test('validationmethods', async ({page})=>{
     //capture the maleradio button
     const maleradio= page.locator('#item-vfb-31').locator('.vfb-span').getByRole('radio',{name:'Male',exact:true});
     //click on male radio button 
-    await maleradio.click();
-
+    //await maleradio.click();
+   const radiobuttonlocatoraftercheck=await  maleradio.check();
     //check box checked 
 
     //ischecked()- returns true if male is clicked
-    console.log("male radio button clicked: "+maleradio.isChecked());
+    console.log("male radio button clicked: "+await maleradio.isChecked());
 
+    expect(maleradio).toBeTruthy();
     //tobetruthy()- it pass if valu is true. 
+
+    //if we want to validate the at the locator assertion 
+    //expect(page.locator('#item-vfb-31').locator('.vfb-span').getByRole('radio',{name:'Male',exact:true})).toBeChecked();
 
 
 
