@@ -28,4 +28,6 @@ test("Navigation Timeout",async ({page})=>{
 
    await page.goto("https://freelance-learn-automation.vercel.app/",{timeout:2000});// timeout of navigation //set to 100 it will fail, 1k is 1sec
    const a=await  page.waitForNavigation();
+
+ 
 });
