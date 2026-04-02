@@ -1,4 +1,4 @@
-import {test, expect} from '@playwright/test'
+import {test, expect, Locator, Page} from '@playwright/test'
 
 
 test('dropdownselect',async ({page})=>{
@@ -10,6 +10,8 @@ test('dropdownselect',async ({page})=>{
 
     //idenfity the element of drop down and select using value , we can directly right the value 
     await page.selectOption('#dropdown-class-example','Option2');
+    //or
+    await page.selectOption('#dropdown-class-example',{value:'Option1'})
 
     //with index
     await page.selectOption('#dropdown-class-example',{index:3});
@@ -20,7 +22,12 @@ test('dropdownselect',async ({page})=>{
     //validating 
     expect(dropdwonvalue).toBe('option3');
 
+    //validating
+    expect(dropdwonvalue).toEqual('option3')
+
 
 });
 
-    //await page.goto("https://www.tutorialspoint.com/selenium/practice/selenium_automation_practice.php");
+  
+
+
