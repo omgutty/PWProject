@@ -2,13 +2,28 @@ import {test, expect} from '@playwright/test';
 
 test('click on js alert', async ({page})=>{
     
-    page.on('dialog',async (a)=>{
+    //we have written two times with different type actions, 
+    // so we used page.once, page .once will be used only one, for the test, second page.on will be ignore.
+    // in this test if we use page.on two times, while running it will be failed, as we are validating the alert text here 
+    
+    page.once('dialog',async (a)=>{
        if( a.type()=='alert'){
         const textmessage= a.message();
          console.log(a.type())
          console.log(textmessage);
             if(textmessage=='I am a JS Alert'){
             await a.accept(); 
+            }
+        }
+    })
+
+    page.on('dialog',async (b)=>{
+       if( b.type()=='confirm'){
+        const textmessage= b.message();
+        console.log(b.type())
+        console.log(textmessage);
+            if(textmessage=='I am a JS Confirm'){
+            await b.accept(); 
             }
         }
     })
