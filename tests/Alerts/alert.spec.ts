@@ -36,3 +36,22 @@ test('click for js confirm', async ({page})=>{
     //once user click on this alert button, it automatically alert will capture in page on and accept 
 })
 
+
+test('Click for JS Prompt', async ({page})=>{
+    
+    page.on('dialog',async (c)=>{
+       if( c.type()=='prompt'){
+        const textmessage= c.message();
+        console.log(c.type())
+        console.log(textmessage);
+            if(textmessage=='I am a JS prompt'){
+            await c.accept('I am a JS prompt haha'); 
+            }
+        }
+    })
+
+    await page.goto('https://the-internet.herokuapp.com/javascript_alerts');
+    await page.getByRole('button',{name:'Click for JS Prompt'}).click();
+    //once user click on this alert button, it automatically alert will capture in page on and accept 
+})
+
