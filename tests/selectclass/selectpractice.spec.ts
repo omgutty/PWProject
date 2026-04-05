@@ -23,3 +23,7 @@ async function selectbylable (page:Page ,locator:string,label:string):Promise<vo
 async function selectbylablepage(element:Locator,label:string):Promise<void> {
       await element.selectOption({label:label});
 }
+
+async function selectbydropdowntext(page:Page, locator:string,dropdownText:string,label:string) {
+    
+}
