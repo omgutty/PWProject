@@ -1,19 +1,25 @@
 import {expect, Page, test} from '@playwright/test';
-import {faker} from '@faker-js/faker';
+//import {faker} from '@faker-js/faker';
+import { TestDataGenerator } from './testData.ts';
 
 test("signup",async ({page})=>{
     await page.goto('https://freelance-learn-automation.vercel.app/login');
-    const fullName = faker.person.fullName();
-    const email = faker.internet.email();
-    const phone = faker.phone.number();
+    // const fullName = faker.person.fullName();
+    // const email = faker.internet.email();
+    // const phone = faker.phone.number();
 
     //navigating to signup
     await page.locator('.subLink').click();
-    expect(page.waitForURL('https://freelance-learn-automation.vercel.app/signup'));
+    //expect(page.waitForURL('https://freelance-learn-automation.vercel.app/signup'));
+   // start from here  expect(page.waitForURL().toContain('signup');
     
     //filling the form with dynamic value
-    await page.locator('#name').fill(fullName);
-    await sendtext(page,'#email',email);
+  await page.locator('#name').fill(TestDataGenerator.getName());
+  await page.locator('#email').fill(TestDataGenerator.getEmail());
+
+
+   // await page.locator('#name').fill(fullName);
+   // await sendtext(page,'#email',email);
     await sendtext(page,'#password','admin@123');
     //selecting checkbox values- enter valid inputs
     await checkboxselect(page, ['AWS','JS']);
@@ -25,8 +31,18 @@ test("signup",async ({page})=>{
     await selectdropdown(page,'#state','Assam')
 
     //multi selection Hobbies combobox 
+    const hob= page.locator('#hobbies option');
+    await page.locator('#hobbies').selectOption(['Reading', 'Swimming']);
+    await multiselctiondropdown(page,'#hobbies',['Reading','Swimming'])
+
+    expect( page.getByRole('button',{name:'Sign up'}).isEnabled);
+    
  
 })
+
+async function multiselctiondropdown(page:Page,locator:string, hobbies:string[]):Promise<void>{
+    await page.locator(`${locator}`).selectOption(hobbies);
+}
 
 async function selectdropdown(page:Page,locator:string, state:string):Promise<void>{
     await page.selectOption(locator,{label:state})
