@@ -16,5 +16,5 @@ test('manager course page data',async ({page})=>{
     await page.goto('https://freelance-learn-automation.vercel.app/');
     await page.locator('.nav-menu-item-manage').hover();
     await page.getByRole('link',{name:'Manage Courses'}).click();
-    await expect(page.getByAltText('Manage Courses')).toBeTruthy();
+    expect(page.getByAltText('Manage Courses')).toBeTruthy();
 })
