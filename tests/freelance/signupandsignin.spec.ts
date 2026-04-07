@@ -20,7 +20,6 @@ test('signup', async ({ page }) => {
     await util.radiobuttonclick(page.locator(".genders-div input[value='Female']"));
     await util.selectdropdown(page.locator('#state'), 'Assam');
     await util.multiselction(page.locator('#hobbies'),['Reading', 'Swimming']);
-
     await page.getByRole('button', { name: 'Sign up' }).click();
 });
 
