@@ -35,6 +35,7 @@ test('fetching data',async ({page})=>{
 })
 
 
+
 //https://chatgpt.com/c/69d3738f-92fc-83e8-852b-d9ebade08f72
 export async function getColumnValuesByHeader(
     table: Locator,
