@@ -23,6 +23,8 @@ test('static table',async ({page})=>{
 
 })
 
+
+
 //pass the colum header, it wil fetch all the list and print 
 test('fetching data',async ({page})=>{
     await  page.goto('https://testautomationpractice.blogspot.com/')
