@@ -23,8 +23,12 @@ test('static table with arraymethod',async ({page})=>{
     console.log('total colum of single rows: '+signlerowcolumncount);//it capture only 3, single row have 4 column
 
     console.log('printing all the static tabel data using for of loop ');
+
+    //rows we are calling the all method, which returns aray of each row data, 
+    //when locator pointing list of elements, it return array of locators
     const allrowdata= await rows.all();
 
+    //commit one for loop, uuse only one 
     for(let ref of allrowdata){
         //by adding th and td, it capture the header as well 
         //th is for header, td for tabel data, , if we not use th, empty arrray will print as this for loop 
