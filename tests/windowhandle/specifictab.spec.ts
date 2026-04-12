@@ -8,11 +8,13 @@ test('pass the text for switch ', async ()=>{
 
     await page.goto('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login');
     const links=page.locator('.orangehrm-login-footer-sm');
-   // const linkedinpage:Page= await changetabwithstring(page,links,'linked');
-   // console.log(await linkedinpage.title());
+    const linkedinpage:Page= await changetabwithstring(page,links,'linked');
+    console.log(await linkedinpage.title());
 
     //direct link click ,which open in new tab
     const link= page.locator(`//a[contains(@href,'youtube')]`);
+
+    //this method will not work, as wwe are not add in promise all , race function will fail and it will not print the title 
 
     const newpage=await newtabclick(page,link);
     const newpagetitle =await newpage.title();
@@ -32,10 +34,11 @@ async function changetabwithstring(page:Page,link:Locator, linktext:string):Prom
     return newtab;
 }
 
-async function newtabclick(page:Page,locator:Locator):Promise<Page>{
-    const newTabPromise =  page.waitForEvent('popup');
-    await locator.click()
-    const newTab =  newTabPromise;
-    return newTab
-   // return newTabPromise
+
+//it wil click but, we are not able to perform actions on the child tab, as promise will close, 
+async function newtabclick(page: Page, locator: Locator): Promise<Page> {
+    const newTabPromise = page.waitForEvent('popup');
+    await locator.click();
+    const newTab = await newTabPromise;
+    return newTab;
 }
