@@ -78,10 +78,8 @@ export async function getColumnValuesByHeader(
 
 
 async function fetchcolumwisedata(table:Locator):Promise<void> {
-
     //get the rows locator of the tabel and store in variable  
     const rows = table.locator('tbody tr');
-
     //skipping the header as we are starting from 1, 
     for (let i = 1; i < await rows.count(); i++) {
          //give me the current row based on the index
@@ -90,7 +88,7 @@ async function fetchcolumwisedata(table:Locator):Promise<void> {
         const eachColumn = eachRow.locator('td');
 
         //created empty array to for printing perpuse 
-       // const rowData: (string | null)[] = [];
+        // const rowData: (string | null)[] = [];
         const rowData = [];
         //this loop runs inside each row, till the total number of column, 
         for (let j = 0; j < await eachColumn.count(); j++) {
@@ -103,7 +101,6 @@ async function fetchcolumwisedata(table:Locator):Promise<void> {
          //print the array with pushed data
         console.log(rowData);
     } 
-    
 }
 
 //helper function for get the price, by auther, 

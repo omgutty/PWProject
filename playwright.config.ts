@@ -57,6 +57,17 @@ export default defineConfig({
     
     },
     },
+    //added below code for firefox browser open in windows 2.spec.tson windows handl folder 
+    //  {
+    // name: 'firefox',
+    // use: {
+    //   ...devices['Desktop Firefox'],
+    //   headless: false,
+    //   trace: 'on',
+    //   screenshot: 'on',
+    //   // storageState: 'auth/saucedemologin.json',
+    // },
+    // },
     
   // {
   //     name: 'firefox',
