@@ -1,4 +1,4 @@
-import {test,expect} from '@playwright/test';
+import {test,expect, Locator, Page} from '@playwright/test';
 
 //Q1. Open the website for static webtable and print the total number of rows in the static table 
 test('print the total number of rows ',async ({page})=> {
@@ -82,3 +82,74 @@ test('question 5',async ({page})=>{
 });
 
 //Q6. Print all column header names of the table.
+test('question 6',async ({page})=>{
+    await page.goto("https://testautomationpractice.blogspot.com/",{timeout:50000});
+    const statictable= page.locator("//table[@name='BookTable']");
+    const headerrow= statictable.locator('tr').first();
+    const headerdata=headerrow.locator('th');
+    for(let i=0;i<await headerdata.count();i++){
+        console.log (await headerrow.locator('th').nth(i).textContent());
+    }
+
+})
+
+//Q7. Print the author name of the book 'Master In Selenium'.
+test('question 7',async ({page})=>{
+    await page.goto("https://testautomationpractice.blogspot.com/",{timeout:50000});
+    const statictable= page.locator("//table[@name='BookTable']");
+    console.log("Author name is: " + await FetchAuther(statictable,'Master In Selenium'));
+})
+async function FetchAuther(table:Locator,coursename:string):Promise<string|null>{
+    const row = table.locator(`//tr[td[1]='${coursename}']`);
+    const authorName = await row.locator('td').nth(1).textContent();
+    return authorName;
+}
+
+
+//Q8. Check if the book 'Learn JS' exists in the table — print true or false.
+test('question 8',async ({page})=>{ 
+    await page.goto("https://testautomationpractice.blogspot.com/",{timeout:50000});
+    const statictable= page.locator("//table[@name='BookTable']");
+    const courename:string='Learn JS'
+    console.log(" Book "+courename+" present in table ? " + await autherpresent(statictable,courename));
+})
+async function autherpresent(table:Locator,coursename:string):Promise<boolean>{
+    const tabletada= table.locator(`//tr[td='${coursename}']`).isVisible()
+    return tabletada;
+}
+
+
+
+//Q9. Print all books where the Subject is 'Selenium'.
+//table[@name='BookTable']//tr[td[3]='Selenium']
+test('question 9',async ({page})=>{ 
+    await page.goto("https://testautomationpractice.blogspot.com/",{timeout:50000});
+    const statictable= page.locator("//table[@name='BookTable']");
+    const bookname:string='Selenium'
+    //calling the function , pass page, table, and book name
+    await findbooks(page, statictable,bookname);
+})
+
+async function findbooks(page:Page,table:Locator,bookname:string){
+    //it find the rows which is having the selenium
+    const rows = table.locator(`//tr[td[3]='${bookname}']`);
+    // how many rows it found, count it 
+    const count = await rows.count();
+    //use for loop, to go to each row 
+
+    for(let i=0;i<count;i++){
+
+        const bookName = await rows.nth(i).locator('td').nth(0).textContent();
+        console.log(bookName);
+    }
+    //table.locator(`//tr[td[3]='${bookname}']`).filter({has:page.locator()})
+    //const tabletada= table.locator(`//tr[td='${coursename}']`).isVisible()
+    //return tabletada;
+}
+
+//Q10. Count how many books are written by 'Amit'
+
+
+
+//Q11. Print the book name that has the highest price in the table.
+
