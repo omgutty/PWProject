@@ -1,4 +1,4 @@
-import {test,expect} from '@playwright/test';
+import {test,expect, Page} from '@playwright/test';
 
 //Q1. What is the correct syntax to select an option by label in Playwright?
 // await page.getByLabel('Show toast with icon').click();
@@ -25,7 +25,7 @@ import {test,expect} from '@playwright/test';
 
 test('selectNCR', async ({page})=>{
      await page.goto('https://www.tutorialspoint.com/selenium/practice/selenium_automation_practice.php');
-    await page.selectOption('#state',{label:'NCR'});
+    await page.selectOption('#state',{index:2});
 
     //Q 8 : Write the code to select "Rajasthan" from the State dropdown using value.
     await page.selectOption('#state',{value:'Rajasthan'})
