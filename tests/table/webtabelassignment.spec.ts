@@ -148,8 +148,55 @@ async function findbooks(page:Page,table:Locator,bookname:string){
 }
 
 //Q10. Count how many books are written by 'Amit'
-
-
+test('question 10',async ({page})=>{ 
+    await page.goto("https://testautomationpractice.blogspot.com/",{timeout:50000});
+    const statictable= page.locator("//table[@name='BookTable']");
+    const Auther:string='Amit'
+    
+    const totalnumberofbooksByAuther=await Findthebooksbyauther(page, statictable,Auther);
+    console.log("Total number of books By Auther "+Auther+ ' is  : '+totalnumberofbooksByAuther)
+})
+async function Findthebooksbyauther(page:Page,statictable:Locator,Auther:string):Promise<Number>{
+    //table[@name='BookTable']
+    const allrowswhichauthername=statictable.locator(`//tr[td[2]='${Auther}']`);
+    const totalcount= allrowswhichauthername.count(); 
+    return totalcount
+}
 
 //Q11. Print the book name that has the highest price in the table.
 
+test('question 11',async ({page})=>{ 
+    await page.goto("https://testautomationpractice.blogspot.com/",{timeout:50000});
+    const statictable= page.locator("//table[@name='BookTable']");
+    //FindtheCostlybookname(statictable);
+    const costlyBookName = await findTheCostlyBookName(statictable);
+
+    console.log("Highest priced book is: " + costlyBookName);
+    //const totalnumberofbooksByAuther=await Findthebooksbyauther(page, statictable,Auther);
+    //console.log("Total number of books By Auther "+Auther+ ' is  : '+totalnumberofbooksByAuther)
+})
+async function findTheCostlyBookName(staticTable: Locator): Promise<string> {
+    const prices = staticTable.locator('tr td:nth-child(4)');
+    const priceCount = await prices.count();
+
+    let maxPrice = 0;
+    let maxRowIndex = 0;
+
+    // loop through all prices
+    for (let i = 0; i < priceCount; i++) {
+        const priceText = await prices.nth(i).textContent();
+        const price = Number(priceText);
+
+        if (price > maxPrice) {
+            maxPrice = price;
+            maxRowIndex = i + 1; /// because data rows start after header
+        }
+    }
+
+    /// +1 because tr[1] is header row
+    const bookName = await staticTable
+        .locator(`tr:nth-child(${maxRowIndex + 1}) td:nth-child(1)`)
+        .textContent();
+
+    return bookName ?? '';
+}
