@@ -191,7 +191,7 @@ URL: https://the-internet.herokuapp.com/windows
 Task: Switch focus to the second tab via context.pages()[1], verify its URL, then switch back to page 0.
  */
 
-test('test14 - listen for new tabs using context event', async ()=>{
+test('test14', async ()=>{
     const broswer=await chromium.launch({channel:'chrome',headless:false});
     const browserContext=await broswer.newContext();
     const page= await browserContext.newPage();
@@ -239,3 +239,22 @@ URL: https://the-internet.herokuapp.com/windows
 Task: Create a new page using browserContext.newPage(), navigate it to a URL, and verify it loaded
  */
 
+test('test 15', async ()=>{
+    const broswer=await chromium.launch({channel:'chrome',headless:false});
+    const browserContext=await broswer.newContext();
+   
+    //first page with new context
+    const page = await browserContext.newPage();
+    await page.goto('https://the-internet.herokuapp.com/windows');
+    const pageloaded=await page.waitForLoadState();
+    // await expect(page).toBeTruthy();
+    await expect(page).toHaveURL(/windows/);
+
+    //creating new page manually 
+    const page2 = await browserContext.newPage();
+    await page2.goto('https://the-internet.herokuapp.com/');
+    await page2.waitForLoadState();
+    await expect(page2).toHaveURL('https://the-internet.herokuapp.com/');
+    console.log('Page 2 Title:', await page2.title());
+
+})
