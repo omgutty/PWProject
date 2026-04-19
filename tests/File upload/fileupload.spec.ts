@@ -12,8 +12,8 @@ test('fileupload', async ({page})=>{
     const filepath=path.resolve('tests/data/file1.txt')
     //locator of the fileupload button, and file path relative 
     //multiple files upload 
-    //await page.setInputFiles('#file-upload',[filepath,filepath2]);
-   
+   // await page.setInputFiles('#file-upload',[filepath,filepath2]);
+    await page.setInputFiles('#file-upload',filepath);
 
     await expect.soft(page.locator('h3')).toHaveText('File Uploaded!');
     await page.locator('#file-submit').click();

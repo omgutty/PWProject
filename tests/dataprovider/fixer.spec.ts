@@ -13,7 +13,6 @@ const test = base.extend<{testData:TestData}>({
         })
     }
 })
-// testdata line error is saying : object literal may only specify known properties, and 'testdata' does not exist in type ''Fixtures<{},{} playwright TestArrgs, & playwright test options and so on...                                                                                      
 
 test('fixer as test data ', async ({page,testData})=>{
     await page.goto('https://freelance-learn-automation.vercel.app/login')
@@ -21,6 +20,5 @@ test('fixer as test data ', async ({page,testData})=>{
        await page.locator('#password1').fill(testData.password);
        await page.locator('.submit-btn').click();
        await expect(page.locator('.welcomeMessage')).toHaveText('Welcome Admin Manager to Learn Automation Courses');
-   
 
 })
