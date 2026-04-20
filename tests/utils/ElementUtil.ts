@@ -25,17 +25,40 @@ export class ElementUtil{
     //we have defined this type above, which accept string or locator 
     //this entire method return Locaotr 
     public getBylocator (locator:dynamiclocator):Locator{
-
         if (typeof locator=='string'){
             return this.page.locator(locator);
         }
-
         return locator
     }
 
+    //double click 
+    public async doubleclick(locator:dynamiclocator){
+        return await this.getBylocator(locator).dblclick();
+    }
+
+    //single click 
     public async click(locator:dynamiclocator){
         await this.getBylocator(locator).click();
     }
+
+    //single click forcefully
+    public async forcheclick (locator:dynamiclocator,opt?:{force?:boolean,timeout?:number}){
+        await this.getBylocator(locator).click();
+    }
+
+    //get the text from element and return string
+    public async gettext(locator:dynamiclocator):Promise <string |null>{
+        return await this.getBylocator(locator).textContent({timeout:this.defaulttimeout})
+    }
+
+    //check the element is enabled, 
+    // check the elemen is checked, disabled. 
+    //check element is checked (radio/checkbox)
+
+    async ischecked(locator:dynamiclocator){
+        await this.getBylocator(locator).isChecked({timeout: this.defaulttimeout});
+    }
+
 
 }
 
