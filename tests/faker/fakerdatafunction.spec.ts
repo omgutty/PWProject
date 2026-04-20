@@ -1,18 +1,29 @@
 import {test, expect} from '@playwright/test';
 import { faker } from '@faker-js/faker';
 
-test('faker data generation and signup', async ({ page }) => {
-    await page.goto('https://tutorialsninja.com/demo/index.php?route=account/register');
-
-    const firstName = faker.person.firstName();
+//function creation 
+function  generatesignuptestdata(){
+     const firstName = faker.person.firstName();
     const lastName = faker.person.lastName();
     const email = faker.internet.email({firstName:firstName, provider: 'example.com' });
     const telephone = faker.phone.number({style:'national'});
 
-    await page.locator('#input-firstname').fill(firstName);
-    await page.locator('#input-lastname').fill(lastName);
-    await page.locator('#input-email').fill(email);
-    await page.locator('#input-telephone').fill(telephone);
+    return {
+        firstName,lastName,email,telephone
+    }
+
+}
+
+test('faker data generation and signup', async ({ page }) => {
+    await page.goto('https://tutorialsninja.com/demo/index.php?route=account/register');
+
+    //call function to generate the data 
+   const user=generatesignuptestdata();
+
+    await page.locator('#input-firstname').fill(user.firstName);
+    await page.locator('#input-lastname').fill(user.lastName);
+    await page.locator('#input-email').fill(user.email);
+    await page.locator('#input-telephone').fill(user.telephone);
     
     const password = faker.internet.password({length: 12, memorable: true, pattern: /A-Za-z0-9/,prefix: 'Auto'});
     await page.locator('#input-password').fill(password);
@@ -25,8 +36,8 @@ test('faker data generation and signup', async ({ page }) => {
 
     await page.waitForTimeout(5000);
     //console log to print generated data in console
-    console.log('Generated First Name: ' + firstName);
-    console.log('Generated Email: ' +  email);
+    console.log('Generated First Name: ' + user.firstName);
+    console.log('Generated Email: ' +  user.email);
     console.log('Generated Password: ' + password);
 
     //assertion to verify successful registration
