@@ -16,7 +16,7 @@ import {Page,Locator,expect}from '@playwright/test'
         this.page=page;
         
         //below this will store a locator
-        this.headingText= page.getByRole('heading',{name:'Think different. Make different.'});
+        this.headingText= page.getByRole('heading', { name: 'Think different. Make different.' });
         this.getstartedbutton= page.locator('#get-started');
         this.homelink= page.getByRole('navigation').getByRole('link',{name:'Home'});
         this.searchicon=  page.locator(`//a[@class='zak-header-search__toggle']`).first();
